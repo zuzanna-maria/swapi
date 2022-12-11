@@ -1,0 +1,53 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' ?v=1657655 %}">
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>
+                Star Wars Explorer
+            </h1>
+        </div>
+
+        <div id="form-div" >
+            <div id="back-button">
+                <a class="button-1" href="{{request.META.HTTP_REFERER}}">Back to dataset</a>
+            </div>
+            <div id="back-button">
+                <a class="button-1" href="{% url 'display_all_datasets' %}">Back to all datasets</a>
+            </div>
+        </div>
+
+        <div id="table-div">
+            <table id="table" class="display" style="width: 100%;">
+                <thead>
+                  <tr>
+                    {% for value in values%}
+                    <th>{{ value }}</th>
+                    {% endfor %}
+                    <th>occurrence</th>
+                  </tr>
+            
+                </thead>
+                <tbody>
+                  
+                    {% for l in occurrences %}
+                    <tr>
+                        {% for v in l %}
+                            <td>{{ v }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                    
+                  
+                </tbody>
+              </table>
+        </div>
+    </body>
+</html>
+
+

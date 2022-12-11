@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' ?v=1657655 %}">
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>
+                Star Wars Explorer
+            </h1>
+        </div>
+        <div class="container">
+            <div class="vertical-center">
+                <a class="button-1"  href="{% url 'call_api' %}">Fetch dataset</a>
+            </div>
+        </div>
+    </body>
+</html>

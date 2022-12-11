@@ -1,0 +1,83 @@
+
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' ?v=1657655 %}">
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>
+                Star Wars Explorer
+            </h1>
+        </div>
+
+        <div id="form-div" >
+            <div id="form-div-2">
+                <form method="post" action="/sw_characters/value_counter">{% csrf_token %}      
+                    <fieldset>      
+                        <legend>Count occurrences of categories</legend>      
+                        {% for header in headers%}
+                        <input type="checkbox" name="chosen_value" value="{{header}}">{{ header }}
+                        {% endfor %}
+                        <input type="hidden" name="dataset_filename" value="{{dataset_filename}}"><br> 
+                        <br>      
+                        <input type="submit" class="button-1" value="Submit" />      
+                    </fieldset>      
+                </form>
+            </div>
+            <div id="button-div">
+                <div id="back-button">
+                    <a class="button-1" href="{% url 'display_all_datasets' %}">Back to all datasets</a>
+                </div>
+            </div>
+        </div>
+       
+        <h3 id="filename">{{dataset_filename}}</h3>
+        
+        <div id="table-div">
+            <table id="table" class="display" style="width: 100%;">
+                <thead>
+                  <tr>
+                    {% for header in headers%}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  
+                    {% for row in data %}
+                    <tr>
+                        {% for entry in row %}
+                            <td>{{ entry }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                  
+                </tbody>
+              </table>
+        </div>
+       
+        {% if data|length < 82%}
+        <div id="load-button-div">
+            <div id="back-button">
+                <form method="post" action="{% url 'display_dataset' dataset_filename %}">
+                    {% csrf_token %}
+                <input type="hidden" name="load_more" value='10'>
+                <input type="hidden" name="number_of_entries" value='{{data|length}}'> 
+                <input type="submit" class="button-1" value="Load more" /> 
+                </form>
+            </div>
+        </div>
+        {% endif %}
+
+    </body>
+   
+</html>
+
+
+        
+        
+        

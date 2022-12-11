@@ -1,0 +1,29 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'style.css' ?v=1657655 %}">
+    </head>
+    
+    <body>
+        <div id="header">
+            <h1>
+                Star Wars Explorer
+            </h1>
+        </div>
+
+        <div id="table-div">
+            <table id="table" class="display" style="width: 100%;">
+                
+                <tbody>
+                    {% for dataset in datasets%}
+                    <tr>
+                       <td><ul><a href="{% url 'display_dataset' dataset.filename %}">{{dataset.date_downloaded}}</a></ul></td> 
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    </body>
+</html>
